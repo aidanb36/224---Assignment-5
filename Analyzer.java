@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Analyzer {
+    List<Integer> items;
+    
     public int analyze(List<Integer> list){
         
     }

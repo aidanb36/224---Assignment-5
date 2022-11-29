@@ -7,10 +7,13 @@ public class Analyzer {
     
     public int analyze(List<Integer> list){
         
+        for(int i : list){
+            
+        }
     }
 
     private int opt(int i){
-
+        
     }
 
     private List<Integer> traceback(int i){

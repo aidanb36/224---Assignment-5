@@ -1,18 +1,17 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
 
 class Analyzer {
     private int[] M;
     private List<Integer> items;
-    
-    // Analyze function fills in memoized array 
+  
     public int analyze(List<Integer> list) {
       items = list;
       M = new int[list.size()];
       return opt(0);
     }
   
-    // Uses reccurence relation to store the max value in M
     private int opt(int i) {
       if (i == items.size() - 1)
         return 1;

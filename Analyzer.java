@@ -12,7 +12,12 @@ class Analyzer {
       return opt(0);
     }
   
-    // Uses reccurence relation to store the max value in M
+    /**
+     *  Uses reccurence relation to store the max value in M
+     *  j is i + 1 for all j less than item size
+     *  if j is greater than i, call opt(j) + 1 and assign it to temp
+     *  Add the max to the memoized array and return the max
+     * */
     private int opt(int i) {
       if (i == items.size() - 1)
         return 1;

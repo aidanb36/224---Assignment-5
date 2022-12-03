@@ -2,79 +2,43 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Analyzer {
-
-    List <Integer> items;  //the original list
-    List <Integer> M;
-
-    public int analyze(List<Integer> list){
-        /*
-        * if M[i] > 0{
-        *  return M[i]
-        * } 
-        * else{
-        *  val = 1 + max opt(j), where i < j <= n - 1 and sj > si
-        *  M[i] = val
-        * return val
-        * }
-        */
-
-        //add list values to items
-        for (int i = 0; i < list.size(); i++) {
-            items.add(list.get(i));
-            M.add(1);
-        }
-        M.set(M.size() - 1, 1);
-
-        for (int i = list.size() - 1; i > -1; i--) {
-            opt(i);
-        }
-
-        // System.out.println(M);
-        return Collections.max(M);
+class Analyzer {
+    private int[] M;
+    private List<Integer> items;
+  
+    public int analyze(List<Integer> list) {
+      items = list;
+      M = new int[list.size()];
+      return opt(0);
     }
-
-    private int opt(int i){
-
-        int val = 0;
-        if (M.get(i) > 1){
-            return M.get(i);
+  
+    private int opt(int i) {
+      if (i == items.size() - 1)
+        return 1;
+      if (M[i] != 0)
+        return M[i];
+      int max = 1;
+      for (int j = i + 1; j < items.size(); j++) {
+        if (items.get(j) > items.get(i)) {
+          int temp = 1 + opt(j);
+          if (temp > max)
+            max = temp;
         }
-
-        else{
-            for(int j = i + 1; j < items.size(); j++){
-                if(i < j & j <= M.size() - 1 & items.get(j) > items.get(i)){
-                    val = opt(j) + 1;
-                    M.set(i,val);
-                    break;
-                    // int max = 0;
-                    // for(int a = 0; a < items.size(); a++){
-                    //     max = Math.max(max, opt(a));
-                    //     return max;
-                }
-                else{
-                    val = M.get(i);
-                    M.set(i,val);
-                }   
-            }
-            return val;
-        }
+      }
+      M[i] = max;
+      return max;
     }
-
-    private List<Integer> traceback(int i){
-        /*
-         * res = {si}
-         * let j>i be the smallest index for which M[i] = 1 + M[j]
-         * append traceback(j) to res
-         * return res
-         */
-        List<Integer> finals = new ArrayList<>();
-
-        for (int j = 0; j < M.size(); j++) {
-            finals.add(M.get(j));
+  
+    private List<Integer> traceback(int i) {
+      List<Integer> result = new ArrayList<Integer>();
+      result.add(items.get(i));
+      int max = M[i];
+      for (int j = i + 1; j < items.size(); j++) {
+        if (items.get(j) > items.get(i) && M[j] == max - 1) {
+          result.add(items.get(j));
+          max--;
         }
-        return finals;
-
+      }
+      return result;
     }
 }
-

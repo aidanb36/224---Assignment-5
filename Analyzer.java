@@ -24,10 +24,9 @@ public class Analyzer {
         * }
         */
     private int opt(int i){
-        int[] M;      //M
-
-        if (M[i] >0){
-            return M[i];
+        List <Integer> M;
+        if (M.get(i) >0){
+            return M.get(i);
         }
 
         else{
@@ -39,7 +38,7 @@ public class Analyzer {
                         max = Math.max(max, opt(a));
                         return max;
                     }
-                    M[i] = val;
+                    M.get(i) = val;
                 }
             }
         }
@@ -56,4 +55,3 @@ public class Analyzer {
     }
 }
 
-//djikstra's algorithm in python?

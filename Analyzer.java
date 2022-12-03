@@ -4,8 +4,7 @@ import java.util.Arrays;
 
 public class Analyzer {
 
-    List<Integer> items;  //the original list
-    int[] M;      //M
+    List <Integer> items;  //the original list
 
     public int analyze(List<Integer> list){
         
@@ -14,8 +13,6 @@ public class Analyzer {
             items.add(i);
         }
     }
-
-    private int opt(int i){
         /*
         * if M[i] > 0{
         *  return M[i]
@@ -26,14 +23,26 @@ public class Analyzer {
         * return val
         * }
         */
-        if(M[i] > 0){
-            return M[i];
-        } 
+    private int opt(int i){
+        int[] M;      //M
 
-        else{
-            int val = 1 + opt(j);
+        if (M[i] >0){
+            return M[i];
         }
 
+        else{
+            int val = 1;
+            for(int j = i + 1; j < items.size(); j++){
+                if(items.get(j) > items.get(i)){
+                    int max = 0;
+                    for(int a = 0; a < items.size(); a++){
+                        max = Math.max(max, opt(a));
+                        return max;
+                    }
+                    M[i] = val;
+                }
+            }
+        }
     }
 
     private List<Integer> traceback(int i){
@@ -46,3 +55,5 @@ public class Analyzer {
 
     }
 }
+
+//djikstra's algorithm in python?

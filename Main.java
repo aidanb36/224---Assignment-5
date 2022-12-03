@@ -23,6 +23,7 @@ public class Main {
     Analyzer analyzer = new Analyzer();
     int result = analyzer.analyze(list);
     System.out.println("result is " + result);
+    
   } // testOne()
 
   //---------------------------------------------------------------------
